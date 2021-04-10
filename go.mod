@@ -1,4 +1,4 @@
-module scraping-my-hatebu
+module github.com/esakat/scraping-my-hatebu
 
 go 1.15
 
