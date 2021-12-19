@@ -55,7 +55,7 @@ func scrape(username string) (myBookmarks []MyBookmark) {
 		// GET Entry URL
 		href, _ := s.Find(".centerarticle-entry-title").Find("a").Attr("href")
 
-		// GET Entry Ttile
+		// GET Entry Title
 		title := s.Find(".centerarticle-entry-title").Find("a").Text()
 
 		// GET Entry Own Comment
@@ -78,8 +78,8 @@ func scrape(username string) (myBookmarks []MyBookmark) {
 		// GET Entry Timestamp
 		timestamp := s.Find(".centerarticle-reaction-timestamp").Text()
 
-		// check redis set, if it is already exist, do nothing.
-		if !HasEid(eid) && isToday(timestamp) {
+		// if it already exists in Firestore, do nothing.
+		if isToday(timestamp) && !HasEid(eid) {
 			myBookmarks = append(myBookmarks, MyBookmark{
 				EntryID:   eid,
 				URL:       href,
